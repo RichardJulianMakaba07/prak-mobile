@@ -1,16 +1,6 @@
 import 'package:flutter/material.dart';
 
-// =========================================================================
-// File ini adalah HALAMAN HOME dari aplikasi "Campus Lost & Found".
-// Widget dari Modul 2 (Widget Dasar) yang digunakan di file ini:
-//   Scaffold, SafeArea, SingleChildScrollView, Padding, Column, Row,
-//   Container, SizedBox, Text, Icon, TextField, Expanded.
-// (MaterialApp ada di main.dart)
-// Setiap pemakaian widget diberi comment penjelas di sampingnya.
-// =========================================================================
-
-// Enum untuk merepresentasikan status sebuah laporan: barang hilang
-// atau barang yang berhasil ditemukan oleh pelapor
+// Enum untuk merepresentasikan status sebuah laporan: barang hilang atau barang yang berhasil ditemukan oleh pelapor
 enum ReportStatus { hilang, ditemukan }
 
 // Model data sederhana untuk satu laporan barang hilang/ditemukan
@@ -36,8 +26,7 @@ class LostFoundReport {
   });
 }
 
-// HomePage bersifat Stateful karena ada interaksi: mengetik di kolom
-// pencarian, memilih kategori, dan memilih filter status laporan
+// HomePage bersifat Stateful karena ada interaksi: mengetik di kolom pencarian, memilih kategori, dan memilih filter status laporan
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -55,8 +44,6 @@ class _HomePageState extends State<HomePage> {
   String? _selectedCategory; // kategori quick-access yang sedang dipilih (bisa null)
 
   // Dummy data laporan barang hilang & ditemukan di lingkungan kampus.
-  // Pada aplikasi versi lanjut, data ini akan berasal dari database/backend,
-  // lalu dicocokkan otomatis berdasarkan kategori, warna, lokasi & tanggal.
   final List<LostFoundReport> _reports = [
     const LostFoundReport(
       name: 'Dompet Kulit Hitam',
@@ -142,7 +129,6 @@ class _HomePageState extends State<HomePage> {
 
   // Getter yang menghasilkan daftar laporan setelah difilter berdasarkan
   // kata kunci pencarian, filter status, dan kategori yang dipilih.
-  // Ini adalah cikal-bakal sederhana dari "sistem matching" pada versi lanjut.
   List<LostFoundReport> get _filteredReports {
     return _reports.where((report) {
       final keyword = _searchKeyword.toLowerCase();
@@ -172,23 +158,21 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // Scaffold -> struktur dasar halaman aplikasi mobile (Modul 2: Scaffold)
+    // Scaffold -> struktur dasar halaman aplikasi mobile
     return Scaffold(
       // backgroundColor, mengikuti warna tema aplikasi
       backgroundColor: const Color(0xFFF5F6FA),
 
-      // body, berisi seluruh konten halaman utama (home)
+      // body, berisi seluruh konten halaman utama 
       body: SafeArea(
-        // SafeArea (Modul 2) -> memastikan konten tidak tertutup area yang
-        // tertutup perangkat, seperti notch atau status bar
+        // SafeArea -> memastikan konten tidak tertutup area yang tertutup perangkat, seperti notch atau status bar
         child: SingleChildScrollView(
-          // SingleChildScrollView (Modul 2) -> agar seluruh isi halaman
-          // dapat di-scroll vertikal ketika kontennya lebih panjang dari layar
+          // SingleChildScrollView -> agar seluruh isi halaman dapat di-scroll vertikal ketika kontennya lebih panjang dari layar
           child: Padding(
-            // Padding (Modul 2) -> memberi jarak antara konten dengan tepi layar
+            // Padding -> memberi jarak antara konten dengan tepi layar
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
             child: Column(
-              // Column (Modul 2) -> menyusun setiap section halaman secara vertikal
+              // Column -> menyusun setiap section halaman secara vertikal
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildHeader(),
@@ -214,22 +198,21 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // ---------------------------------------------------------------------
+  // ---------------------------------------------
   // Header: sapaan pengguna + tombol notifikasi
-  // ---------------------------------------------------------------------
+  // ---------------------------------------------
   Widget _buildHeader() {
     return Row(
-      // Row (Modul 2) -> menyusun sapaan (kiri) dan ikon notifikasi (kanan)
+      // Row -> menyusun sapaan (kiri) dan ikon notifikasi (kanan)
       // secara horizontal dalam satu baris
       children: [
         Expanded(
-          // Expanded (Modul 2) -> memaksa kolom sapaan mengisi sisa ruang
-          // yang tersedia, sehingga ikon notifikasi terdorong ke kanan
+          // Expanded -> memaksa kolom sapaan mengisi sisa ruang yang tersedia, sehingga ikon notifikasi terdorong ke kanan
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                // Text (Modul 2) -> menampilkan nama aplikasi
+                // Text -> menampilkan nama aplikasi
                 'Campus Lost & Found',
                 style: TextStyle(
                   fontSize: 20,
@@ -246,8 +229,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         Container(
-          // Container (Modul 2) -> membungkus ikon notifikasi, mengatur
-          // padding, warna latar, dan bentuk lingkaran (BoxDecoration)
+          // Container -> membungkus ikon notifikasi, mengatur padding, warna latar, dan bentuk lingkaran (BoxDecoration)
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.white,
@@ -255,7 +237,7 @@ class _HomePageState extends State<HomePage> {
             border: Border.all(color: Colors.grey.shade300),
           ),
           child: const Icon(
-            // Icon (Modul 2) -> ikon lonceng notifikasi
+            // Icon -> ikon lonceng notifikasi
             Icons.notifications_none_rounded,
             size: 22,
             color: Colors.black87,
@@ -265,20 +247,19 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // ---------------------------------------------------------------------
+  // -------------------------------------------
   // Kolom pencarian barang hilang / ditemukan
-  // ---------------------------------------------------------------------
+  // -------------------------------------------
   Widget _buildSearchBar() {
     return Container(
-      // Container (Modul 2) -> membungkus TextField agar punya latar putih,
-      // sudut membulat (borderRadius), dan garis tepi (border)
+      // Container -> membungkus TextField agar punya latar putih, sudut membulat (borderRadius), dan garis tepi (border)
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
         border: Border.all(color: Colors.grey.shade300),
       ),
       child: TextField(
-        // TextField (Modul 2) -> widget input teks untuk mencari laporan
+        // TextField -> widget input teks untuk mencari laporan
         controller: _searchController,
         onChanged: (value) => setState(() => _searchKeyword = value),
         decoration: InputDecoration(
@@ -290,10 +271,10 @@ class _HomePageState extends State<HomePage> {
               const EdgeInsets.symmetric(vertical: 14, horizontal: 16),
           // suffixIcon, menampilkan ikon di ujung kanan TextField
           suffixIcon: Padding(
-            // Padding (Modul 2) -> memberi jarak antara ikon dan tepi kanan TextField
+            // Padding -> memberi jarak antara ikon dan tepi kanan TextField
             padding: const EdgeInsets.only(right: 12),
             child: Icon(
-              // Icon (Modul 2) -> ikon kaca pembesar penanda kolom pencarian
+              // Icon -> ikon kaca pembesar penanda kolom pencarian
               Icons.search,
               size: 22,
               color: Colors.grey.shade400,
@@ -305,34 +286,32 @@ class _HomePageState extends State<HomePage> {
   }
 
   // ---------------------------------------------------------------------
-  // Akses cepat kategori barang (Dompet, HP, Laptop, dst) - bisa digeser
+  // Akses cepat kategori barang (Dompet, HP, Laptop, dst) bisa digeser
   // ---------------------------------------------------------------------
   Widget _buildCategoryQuickAccess() {
     return SizedBox(
-      // SizedBox (Modul 2) -> membatasi tinggi area kategori agar layout rapi
+      // SizedBox -> membatasi tinggi area kategori agar layout rapi
       height: 82,
       child: SingleChildScrollView(
-        // SingleChildScrollView (Modul 2) -> versi horizontal, agar daftar
-        // kategori bisa digeser ke samping jika jumlahnya banyak
+        // SingleChildScrollView -> versi horizontal, agar daftar kategori bisa digeser ke samping jika jumlahnya banyak
         scrollDirection: Axis.horizontal,
         child: Row(
-          // Row (Modul 2) -> menyusun setiap ikon kategori secara horizontal
+          // Row -> menyusun setiap ikon kategori secara horizontal
           children: _categories.map((cat) {
             final label = cat['label'] as String;
             final bool isSelected = _selectedCategory == label;
             return Padding(
               padding: const EdgeInsets.only(right: 14),
               child: GestureDetector(
-                // GestureDetector bukan bagian Modul 2, dipakai hanya agar
-                // kategori bisa ditekan (di luar cakupan modul widget dasar)
+                // GestureDetector dipakai hanya agar kategori bisa ditekan
                 onTap: () {
                   setState(() => _selectedCategory = isSelected ? null : label);
                 },
                 child: Column(
-                  // Column (Modul 2) -> menyusun ikon (atas) dan label (bawah)
+                  // Column -> menyusun ikon (atas) dan label (bawah)
                   children: [
                     Container(
-                      // Container (Modul 2) -> latar bulat untuk ikon kategori
+                      // Container -> latar bulat untuk ikon kategori
                       padding: const EdgeInsets.all(14),
                       decoration: BoxDecoration(
                         color: isSelected
@@ -342,7 +321,7 @@ class _HomePageState extends State<HomePage> {
                         border: Border.all(color: Colors.grey.shade300),
                       ),
                       child: Icon(
-                        // Icon (Modul 2) -> ikon representasi kategori barang
+                        // Icon -> ikon representasi kategori barang
                         cat['icon'] as IconData,
                         size: 22,
                         color: isSelected ? Colors.white : Colors.black87,
@@ -350,7 +329,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const SizedBox(height: 6), // SizedBox: jarak ikon ke label
                     Text(
-                      // Text (Modul 2) -> label nama kategori
+                      // Text -> label nama kategori
                       label,
                       style: const TextStyle(fontSize: 11),
                     ),
@@ -364,22 +343,22 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // ---------------------------------------------------------------------
+  // --------------------------------------------
   // Filter status: Semua / Hilang / Ditemukan
-  // ---------------------------------------------------------------------
+  // --------------------------------------------
   Widget _buildStatusFilterChips() {
     final filters = ['Semua', 'Hilang', 'Ditemukan'];
     return Row(
-      // Row (Modul 2) -> menyusun ketiga chip filter status secara horizontal
+      // Row -> menyusun ketiga chip filter status secara horizontal
       children: filters.map((filter) {
         final bool isSelected = _selectedStatusFilter == filter;
         return Padding(
-          // Padding (Modul 2) -> memberi jarak antar chip filter
+          // Padding -> memberi jarak antar chip filter
           padding: const EdgeInsets.only(right: 10),
           child: GestureDetector(
             onTap: () => setState(() => _selectedStatusFilter = filter),
             child: Container(
-              // Container (Modul 2) -> bentuk chip filter, warnanya berubah
+              // Container -> bentuk chip filter, warnanya berubah
               // sesuai status yang sedang aktif dipilih
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               decoration: BoxDecoration(
@@ -392,7 +371,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               child: Text(
-                // Text (Modul 2) -> label nama filter (Semua/Hilang/Ditemukan)
+                // Text -> label nama filter (Semua/Hilang/Ditemukan)
                 filter,
                 style: TextStyle(
                   fontSize: 13,
@@ -407,18 +386,17 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // ---------------------------------------------------------------------
+  // ----------------------------------------------------------
   // Judul section "Laporan Terbaru" + tautan "Lihat Semua"
-  // ---------------------------------------------------------------------
+  // ----------------------------------------------------------
   Widget _buildSectionTitle() {
     return Row(
-      // Row (Modul 2) -> menyusun judul (kiri) dan tautan "Lihat Semua" (kanan)
+      // Row -> menyusun judul (kiri) dan tautan "Lihat Semua" (kanan)
       children: [
         const Expanded(
-          // Expanded (Modul 2) -> judul mengisi sisa ruang agar tautan
-          // "Lihat Semua" selalu berada di ujung kanan
+          // Expanded -> judul mengisi sisa ruang agar tautan "Lihat Semua" selalu berada di ujung kanan
           child: Text(
-            // Text (Modul 2) -> judul section
+            // Text -> judul section
             'Laporan Terbaru',
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
@@ -445,7 +423,7 @@ class _HomePageState extends State<HomePage> {
         padding: const EdgeInsets.symmetric(vertical: 40),
         child: Center(
           child: Text(
-            // Text (Modul 2) -> pesan ketika tidak ada laporan yang cocok
+            // Text -> pesan ketika tidak ada laporan yang cocok
             'Belum ada laporan yang cocok dengan pencarianmu',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.grey.shade500),
@@ -455,7 +433,7 @@ class _HomePageState extends State<HomePage> {
     }
 
     return Column(
-      // Column (Modul 2) -> menyusun seluruh kartu laporan secara vertikal
+      // Column -> menyusun seluruh kartu laporan secara vertikal
       children: reports.map((report) => _buildReportCard(report)).toList(),
     );
   }
@@ -466,8 +444,7 @@ class _HomePageState extends State<HomePage> {
     final Color statusColor = isHilang ? Colors.red : Colors.green;
 
     return Container(
-      // Container (Modul 2) -> kartu (card) pembungkus setiap laporan,
-      // mengatur margin, padding, warna latar, dan borderRadius
+      // Container -> kartu (card) pembungkus setiap laporan, mengatur margin, padding, warna latar, dan borderRadius
       margin: const EdgeInsets.only(bottom: 14),
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
@@ -476,12 +453,11 @@ class _HomePageState extends State<HomePage> {
         border: Border.all(color: Colors.grey.shade200),
       ),
       child: Row(
-        // Row (Modul 2) -> menyusun foto barang (kiri) dan detail laporan (kanan)
+        // Row -> menyusun foto barang (kiri) dan detail laporan (kanan)
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            // Container (Modul 2) -> placeholder foto barang (nantinya bisa
-            // diganti Image.network/Image.file berisi foto asli dari pelapor)
+            // Container -> placeholder foto barang (nantinya bisa diganti Image.network/Image.file berisi foto asli dari pelapor)
             width: 64,
             height: 64,
             decoration: BoxDecoration(
@@ -489,7 +465,7 @@ class _HomePageState extends State<HomePage> {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(
-              // Icon (Modul 2) -> ikon representasi kategori barang
+              // Icon -> ikon representasi kategori barang
               report.icon,
               color: Colors.grey.shade500,
               size: 28,
@@ -497,16 +473,15 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(width: 12), // SizedBox: jarak horizontal foto ke teks
           Expanded(
-            // Expanded (Modul 2) -> kolom detail laporan mengisi sisa lebar kartu
+            // Expanded -> kolom detail laporan mengisi sisa lebar kartu
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  // Row (Modul 2) -> nama barang (kiri) dan badge status (kanan)
+                  // Row -> nama barang (kiri) dan badge status (kanan)
                   children: [
                     Expanded(
-                      // Expanded (Modul 2) -> nama barang bisa mengisi ruang
-                      // yang tersedia dan terpotong (ellipsis) jika terlalu panjang
+                      // Expanded -> nama barang bisa mengisi ruang yang tersedia dan terpotong (ellipsis) jika terlalu panjang
                       child: Text(
                         report.name,
                         style: const TextStyle(
@@ -515,7 +490,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     Container(
-                      // Container (Modul 2) -> badge kecil penanda status laporan
+                      // Container -> badge kecil penanda status laporan
                       padding:
                           const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                       decoration: BoxDecoration(
@@ -535,7 +510,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(height: 4), // SizedBox: jarak nama ke deskripsi
                 Text(
-                  // Text (Modul 2) -> deskripsi singkat barang
+                  // Text -> deskripsi singkat barang
                   report.description,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -543,10 +518,10 @@ class _HomePageState extends State<HomePage> {
                 ),
                 const SizedBox(height: 6), // SizedBox: jarak deskripsi ke info lokasi
                 Row(
-                  // Row (Modul 2) -> menyusun ikon lokasi, warna+lokasi, dan tanggal
+                  // Row -> menyusun ikon lokasi, warna+lokasi, dan tanggal
                   children: [
                     Icon(
-                      // Icon (Modul 2) -> ikon lokasi
+                      // Icon -> ikon lokasi
                       Icons.location_on_outlined,
                       size: 14,
                       color: Colors.grey.shade500,
@@ -581,9 +556,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // ---------------------------------------------------------------------
+  // -----------------------------------------------------
   // Navigasi bawah: Beranda, Laporkan, Riwayat, Profil
-  // ---------------------------------------------------------------------
+  // -----------------------------------------------------
   Widget _buildBottomNavigationBar() {
     final navItems = [
       {'icon': Icons.home_rounded, 'label': 'Beranda'},
@@ -593,33 +568,30 @@ class _HomePageState extends State<HomePage> {
     ];
 
     return Container(
-      // Container (Modul 2) -> membungkus seluruh bar navigasi bawah,
-      // memberi warna latar putih dan garis pemisah di bagian atas
+      // Container -> membungkus seluruh bar navigasi bawah, memberi warna latar putih dan garis pemisah di bagian atas
       padding: const EdgeInsets.symmetric(vertical: 10),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border(top: BorderSide(color: Colors.grey.shade200)),
       ),
       child: SafeArea(
-        // SafeArea (Modul 2) -> memastikan menu navigasi tidak tertutup
-        // gesture bar di bagian bawah perangkat (top: false karena hanya
-        // area bawah yang perlu diamankan di sini)
+        // SafeArea -> memastikan menu navigasi tidak tertutup gesture bar di bagian bawah perangkat (top: false karena hanya area bawah yang perlu diamankan di sini)
         top: false,
         child: Row(
-          // Row (Modul 2) -> menyusun setiap menu navigasi secara horizontal
+          // Row -> menyusun setiap menu navigasi secara horizontal
           children: List.generate(navItems.length, (index) {
             final bool isSelected = _selectedNavIndex == index;
             final item = navItems[index];
             return Expanded(
-              // Expanded (Modul 2) -> setiap menu mendapat lebar yang sama rata
+              // Expanded -> setiap menu mendapat lebar yang sama rata
               child: GestureDetector(
                 onTap: () => setState(() => _selectedNavIndex = index),
                 child: Column(
-                  // Column (Modul 2) -> menyusun ikon (atas) dan label (bawah)
+                  // Column -> menyusun ikon (atas) dan label (bawah)
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(
-                      // Icon (Modul 2) -> ikon menu navigasi
+                      // Icon -> ikon menu navigasi
                       item['icon'] as IconData,
                       size: 24,
                       color: isSelected
@@ -628,7 +600,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     const SizedBox(height: 2), // SizedBox: jarak ikon ke label
                     Text(
-                      // Text (Modul 2) -> label nama menu
+                      // Text -> label nama menu
                       item['label'] as String,
                       style: TextStyle(
                         fontSize: 11,

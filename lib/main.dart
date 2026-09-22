@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // MaterialApp -> widget wrapper utama aplikasi (Modul 2: MaterialApp)
+    // MaterialApp -> widget wrapper utama aplikasi
     // Semua konfigurasi global aplikasi (judul, tema, halaman awal) diatur di sini
     return MaterialApp(
       // title, nama aplikasi (dipakai oleh OS, tidak tampil di UI)
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Inter',
         // colorScheme.fromSeed menghasilkan palet warna otomatis dari satu warna dasar
-        // Dipilih warna biru navy untuk kesan akademik/kampus yang terpercaya
+        // Dipilih warna biru navy untuk kesan akademik/kampus
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF1E3A8A),
         ),
