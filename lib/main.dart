@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         // colorScheme.fromSeed menghasilkan palet warna otomatis dari satu warna dasar
         // Dipilih warna biru navy untuk kesan akademik/kampus
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF1E3A8A),
+          seedColor: Colors.deepOrange,
         ),
         scaffoldBackgroundColor: const Color(0xFFF5F6FA),
       ),

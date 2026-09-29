@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:posttest2/widgets/category_item.dart';
 import 'package:posttest2/widgets/report_card.dart';
-import 'package:posttest2/report_page.dart';
+import 'package:posttest2/home_page.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class ReportPage extends StatefulWidget {
+  const ReportPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<ReportPage> createState() => _ReportPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _ReportPageState extends State<ReportPage> {
   // Menyimpan index menu yang sedang dipilih
-  int selectedIndex = 0;
+  int selectedIndex = 1;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Laporan'),
+        backgroundColor: Colors.white,
+        shadowColor: Colors.deepOrange,
+        elevation: 13,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30))
+        ),
+      ),
       backgroundColor: const Color(0xFFF5F6FA),
       extendBody: true,
       body: SafeArea(
@@ -24,19 +33,7 @@ class _HomePageState extends State<HomePage> {
           child: Stack(
             children: [
               Container(
-                alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(vertical: 18),
-                child: Text(
-                  'Campus Lost & Found',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color:  Color.fromARGB(255, 19, 18, 18)
-                  ),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(top: 55, left: 20, right: 20),
+                margin: const EdgeInsets.only(top: 45, left: 20, right: 20),
                 height: 285,
                 decoration: BoxDecoration(
                   color: Colors.deepOrange,
@@ -53,7 +50,7 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 40,
-                  vertical: 70,
+                  vertical: 60,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -448,11 +445,11 @@ class _HomePageState extends State<HomePage> {
             elevation: 0, // Menghilangkan bayangan bawaan NavigationBar
             
             onDestinationSelected: (index) {
-              if (index == 1) {
-                Navigator.push(
+              if (index == 0) {
+                Navigator.pop(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const ReportPage(),
+                    builder: (context) => const HomePage(),
                   ),
                 );
               }
