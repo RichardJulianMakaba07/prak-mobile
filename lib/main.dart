@@ -1,9 +1,24 @@
 import 'package:flutter/material.dart';
-import 'home_page.dart';
+import 'package:provider/provider.dart';
+import 'main_page.dart';
+import 'providers/navigation_provider.dart';
+import 'providers/report_provider.dart';
+import 'providers/user_provider.dart';
 
 // Fungsi main() adalah titik masuk (entry point) dari aplikasi Flutter
 void main() {
-  runApp(const MyApp());
+  runApp(
+    // MultiProvider mendaftarkan beberapa ChangeNotifier sekaligus di atas
+    // MaterialApp, sehingga semua halaman bisa mengakses state yang sama.
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => NavigationProvider()),
+        ChangeNotifierProvider(create: (_) => ReportProvider()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 // MyApp adalah root widget dari keseluruhan aplikasi Campus Lost & Found
@@ -26,15 +41,14 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: 'Inter',
         // colorScheme.fromSeed menghasilkan palet warna otomatis dari satu warna dasar
-        // Dipilih warna biru navy untuk kesan akademik/kampus
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.deepOrange,
         ),
         scaffoldBackgroundColor: const Color(0xFFF5F6FA),
       ),
 
-      // home, menentukan halaman pertama yang ditampilkan ketika aplikasi dibuka
-      home: const HomePage(),
+      // home, halaman pertama = MainPage (kerangka dengan bottom navigation)
+      home: const MainPage(),
     );
   }
 }
